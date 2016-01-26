@@ -19,32 +19,21 @@ public class DataExtractor {
   private static List<Element> metadata = new ArrayList<Element>();
 
   public static List<FacebookMessage> extractData(File messageArchive) throws IOException {
-
     Document html = Jsoup.parse(messageArchive, "UTF-8");
     extractHTMLElements(html);
-
     if (validExtraction()) {
       return messageCollection();
     }
-
     return Collections.emptyList();
-
   }
 
   private static List<FacebookMessage> messageCollection() {
-
     List<FacebookMessage> facebookMessages = new ArrayList<FacebookMessage>();
-
     for (int i = 0; i < messages.size(); i++) {
-      FacebookMessage facebookMessage = new FacebookMessage();
-      facebookMessage.setMessage(messages.get(i).text());
-      facebookMessage.setMetadata(metadata.get(i).text());
-      facebookMessage.setUser(users.get(i).text());
-      facebookMessages.add(facebookMessage);
+      facebookMessages.add(
+          new FacebookMessage(users.get(i).text(), metadata.get(i).text(), messages.get(i).text()));
     }
-
     return facebookMessages;
-
   }
 
   private static void extractHTMLElements(Document html) {

@@ -2,6 +2,12 @@ package com.fbm.finder.domain;
 
 public class FacebookMessage {
 
+  public FacebookMessage(String user, String metadata, String message) {
+    this.user = user;
+    this.metadata = metadata;
+    this.message = message;
+  }
+
   private String user;
   private String metadata;
   private String message;
